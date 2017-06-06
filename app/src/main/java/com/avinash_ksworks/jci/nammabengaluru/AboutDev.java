@@ -35,12 +35,6 @@ public class AboutDev extends AppCompatActivity {
             }
         });
 
-        TextView pq1 = (TextView)findViewById(R.id.pq1);
-
-        Typeface myFont = Typeface.createFromAsset(this.getAssets(), "placenames.otf" );
-        pq1.setTypeface(myFont);
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

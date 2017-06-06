@@ -1,36 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_temples"
+            android:icon="@drawable/temple"
+            android:title="Temples" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_trekking"
+            android:icon="@drawable/trekking"
+            android:title="Trekking Places" />
+
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_heritage"
+            android:icon="@drawable/heritage"
+            android:title="Heritage" />
+
+        <item
+            android:id="@+id/nav_otherPlaces"
+            android:icon="@drawable/my_location"
+            android:title="Other Places" />
+
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/maps_item"
+            android:title="MAPS" />
+
+        <item
+            android:id="@+id/nav_favourites"
+            android:icon="@drawable/fav"
+            android:title="FAVOURITES" />
+
+        <item
+            android:id="@+id/nav_visited"
+            android:icon="@drawable/visit"
+            android:title="VISITED" />
+
+
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <group
+        android:id="@+id/bottomPanel"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/new_place"
+            android:icon="@drawable/add_new_place"
+            android:title="Add a new place" />
+
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/feedback"
+            android:title="Feedback" />
+    </group>
+
+
+
 
 </menu>

@@ -3,39 +3,38 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.avinash_ksworks.jci.nammabengaluru.MainActivity"
+    tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#29402b"
+        android:layout_height="16dp"
+        android:background="#424242"
         android:id="@+id/start_slider"
-        android:layout_above="@+id/mainActivitySlider"
-        android:orientation="vertical" />
+        android:layout_above="@+id/mainActivitySlider" />
 
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/mainActivitySlider"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:background="@color/colorAccent"
+        android:background="#616161"
         android:layout_centerInParent="true"
         />
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#29402b"
+        android:layout_height="16dp"
+        android:background="#424242"
+        android:id="@+id/z1"
         android:layout_below="@+id/mainActivitySlider"
         />
-
-
 
 
 </RelativeLayout>

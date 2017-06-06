@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/myCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:padding="2dp"
+        card_view:cardBackgroundColor="@android:color/transparent"
+        card_view:cardElevation="4dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            >
+            <com.facebook.drawee.view.SimpleDraweeView
+                fresco:roundingBorderColor="#a2be94"
+                fresco:roundAsCircle="true"
+                fresco:roundingBorderWidth="2dp"
+                android:padding="1dp"
+                android:id="@+id/item_Image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                />
+            <pttextview.widget.PTTextView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/item_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                app:textWeight="bold"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="110dp"
+                />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+
+
+</LinearLayout>
