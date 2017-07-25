@@ -1,23 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context="com.avinash_ksworks.jci.nammabengaluru.FavouritesFragment">
+    tools:context="com.avinash_ksworks.jci.nammabengaluru.TempleFragment">
 
-    <com.avinash_ksworks.jci.nammabengaluru.myTextView
+
+    <com.avinash_ksworks.jci.nammabengaluru.headingText
         android:id="@+id/p1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:padding="12dp"
-        android:text="FAVOURITE"
+        android:text="LAKES"
         android:textColor="#ffffff"
         android:textSize="28sp" />
 
     <ListView
         android:divider="@null"
-        android:id="@+id/favouriteList"
+        android:id="@+id/lakesList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/p1" />
@@ -25,3 +27,4 @@
 
 
 </RelativeLayout>
+

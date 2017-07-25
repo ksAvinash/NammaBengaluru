@@ -3,7 +3,6 @@ package com.avinash_ksworks.jci.nammabengaluru;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,12 +27,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TrekkingFragment extends Fragment {
+public class LakesFragment extends Fragment {
 
 
-    public TrekkingFragment() {
+    public LakesFragment() {
         // Required empty public constructor
     }
+
     View view;
     DatabaseHelper myDBHelper;
     Context context;
@@ -41,29 +41,32 @@ public class TrekkingFragment extends Fragment {
     ListView list;
     SimpleDraweeView draweeView;
     Cursor cursor;
-    private List<generic_adapter> TREKKING_ADAPTER_LIST = new ArrayList<>();
+    private List<generic_adapter> LAKES_ADAPTER_LIST = new ArrayList<>();
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view =  inflater.inflate(R.layout.fragment_trekking, container, false);
+        // Inflate the layout for this fragment
+        view =  inflater.inflate(R.layout.fragment_lakes, container, false);
         context = getActivity().getApplicationContext();
-
 
         Fresco.initialize(getActivity());
 
 
 
-        list = (ListView) view.findViewById(R.id.trekkingList);
+        list = (ListView) view.findViewById(R.id.lakesList);
 
-        TREKKING_ADAPTER_LIST.clear();
+        LAKES_ADAPTER_LIST.clear();
 
 
         myDBHelper = new DatabaseHelper(context);
-        cursor = myDBHelper.getAllTrekking();
+        cursor = myDBHelper.getAllLakes();
 
         while (cursor.moveToNext()){
 
-            TREKKING_ADAPTER_LIST.add(new generic_adapter(
+            LAKES_ADAPTER_LIST.add(new generic_adapter(
 
                     Integer.parseInt(cursor.getString(0)),
                     cursor.getString(1),
@@ -82,14 +85,16 @@ public class TrekkingFragment extends Fragment {
 
         displayList();
 
-        return view;
-    }
 
+
+
+            return view;
+}
 
 
     public void displayList(){
 
-        ArrayAdapter<generic_adapter> adapter = new myTrekkingListAdapterClass();
+        ArrayAdapter<generic_adapter> adapter = new LakesFragment.myLakesListAdapterClass();
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -109,12 +114,10 @@ public class TrekkingFragment extends Fragment {
     }
 
 
+    public class myLakesListAdapterClass extends ArrayAdapter<generic_adapter> {
 
-
-    public class myTrekkingListAdapterClass extends ArrayAdapter<generic_adapter> {
-
-        myTrekkingListAdapterClass() {
-            super(context, R.layout.list_item, TREKKING_ADAPTER_LIST);
+        myLakesListAdapterClass() {
+            super(context, R.layout.list_item, LAKES_ADAPTER_LIST);
         }
 
 
@@ -126,7 +129,7 @@ public class TrekkingFragment extends Fragment {
                 itemView = inflater.inflate(R.layout.list_item, parent, false);
 
             }
-            generic_adapter current = TREKKING_ADAPTER_LIST.get(position);
+            generic_adapter current = LAKES_ADAPTER_LIST.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage());
@@ -147,3 +150,7 @@ public class TrekkingFragment extends Fragment {
 
 
 }
+
+
+
+

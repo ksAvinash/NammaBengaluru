@@ -24,12 +24,53 @@
 
     <include layout="@layout/content_main" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.sa90.materialarcmenu.ArcMenu
+        android:id="@+id/arcMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:menu_radius="190dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/refresh_icon" />
+        app:menu_scr="@drawable/menu"
+        app:menu_elevation="12dp"
+        app:menu_ripple_color="#ffffff"
+        app:menu_open="arc_left">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_temple"
+            android:layout_width="wrap_content"
+            android:src="@drawable/temple"
+            android:onClick="fab_button_click"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_trekking"
+            android:layout_width="wrap_content"
+            android:src="@drawable/trekking"
+            android:onClick="fab_button_click"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_kids"
+            android:layout_width="wrap_content"
+            android:src="@drawable/kids_icon"
+            android:onClick="fab_button_click"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_parks"
+            android:layout_width="wrap_content"
+            android:src="@drawable/parks_icon"
+            android:onClick="fab_button_click"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_heritage"
+            android:layout_width="wrap_content"
+            android:src="@drawable/heritage"
+            android:onClick="fab_button_click"
+            android:layout_height="wrap_content" />
+
+
+    </com.sa90.materialarcmenu.ArcMenu>
 
 </android.support.design.widget.CoordinatorLayout>

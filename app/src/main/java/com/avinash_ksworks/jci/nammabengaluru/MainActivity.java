@@ -1,17 +1,22 @@
 package com.avinash_ksworks.jci.nammabengaluru;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,8 +26,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avinash_ksworks.jci.nammabengaluru.adapter.DatabaseHelper;
@@ -30,6 +33,7 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.sa90.materialarcmenu.ArcMenu;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +47,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import static android.R.attr.breadCrumbShortTitle;
 import static android.R.attr.fragment;
 
 
@@ -55,6 +60,8 @@ public class MainActivity extends AppCompatActivity
     ProgressDialog pd;
     View view;
     DatabaseHelper myDBHelper;
+    ArcMenu arcMenu;
+    FloatingActionButton fab_temple, fab_trekking, fab_heritage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,30 +70,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        view = (View)findViewById(android.R.id.content);
-
-        pd = new ProgressDialog(this);
-
-
+        initializeViews();
 
         setImageSlider();
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isNetworkConnected()) {
-                    SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
-                    localVersion = preferences.getInt("version", 0);
-                    Toast.makeText(getApplicationContext(), "Please Wait!",Toast.LENGTH_SHORT).show();
-                    new FetchVersion().execute("http://nammabengaluru.000webhostapp.com/general/base_version.json");
-                }
-                else
-                    Snackbar.make(view, "No Internet Connection! ", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-            }
-        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,10 +98,65 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-
     }
 
+    public void initializeViews(){
+        view = findViewById(android.R.id.content);
+        pd = new ProgressDialog(this);
+        arcMenu = (ArcMenu) findViewById(R.id.arcMenu);
 
+        fab_temple = (FloatingActionButton)findViewById(R.id.fab_temple);
+        fab_heritage = (FloatingActionButton)findViewById(R.id.fab_heritage);
+        fab_trekking = (FloatingActionButton)findViewById(R.id.fab_trekking);
+    }
+
+    public void fab_button_click(View view){
+        arcMenu.toggleMenu();
+
+        Fragment fragment;
+        FragmentTransaction ft;
+        switch (view.getId()){
+            case R.id.fab_heritage:
+                fragment = new HeritageFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.fab_temple:
+                fragment = new TempleFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.fab_trekking:
+                fragment = new TrekkingFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.fab_kids:
+                fragment = new KidsFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.fab_parks:
+                fragment = new ParkFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+        }
+    }
 
     public void setImageSlider(){
         new Thread(new Runnable() {
@@ -124,23 +165,37 @@ public class MainActivity extends AppCompatActivity
 
                 mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
                 final HashMap<String, Integer> file_maps = new HashMap<>();
-
+                //Positively do not change any images
                 file_maps.put("Tippu Fort", R.drawable.tippufort);
                 file_maps.put("Cubbon Park", R.drawable.cubbonpark);
                 file_maps.put("Ulsoor Lake", R.drawable.ulsoor);
                 file_maps.put("Vidhana Soudha", R.drawable.vidhana);
                 file_maps.put("Visvesvaraya Museum", R.drawable.vishwesh);
 
-
-                for (String name : file_maps.keySet()) {
+                for (final String name : file_maps.keySet()) {
                     TextSliderView textSliderView = new TextSliderView(getApplicationContext());
                     // initialize a SliderLayout
                     textSliderView
                             .description(name)
                             .image(file_maps.get(name))
+                            .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                @Override
+                                public void onSliderClick(BaseSliderView slider) {
+
+                                    String[] str = name.split(" ");
+                                    myDBHelper = new DatabaseHelper(getApplicationContext());
+                                    Cursor cursor = myDBHelper.getPlaceByString(str[0]);
+
+                                    Fragment fragment = new SearchResultsFragment(cursor);
+                                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                    ft.replace(R.id.content_main, fragment);
+                                    ft.addToBackStack(null);
+                                    ft.commit();
+
+                                }
+                            })
                             .setScaleType(BaseSliderView.ScaleType.Fit);
 
-                    //add your extra information
                     textSliderView.bundle(new Bundle());
                     textSliderView.getBundle()
                             .putString("extra", name);
@@ -152,6 +207,7 @@ public class MainActivity extends AppCompatActivity
                 mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                 mDemoSlider.setCustomAnimation(new DescriptionAnimation());
                 mDemoSlider.setDuration(7000);
+
 
             }
         }).start();
@@ -167,18 +223,51 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener(){
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        myDBHelper = new DatabaseHelper(getApplicationContext());
+                        Cursor cursor = myDBHelper.getPlaceByString(query);
+
+                        Fragment fragment = new SearchResultsFragment(cursor);
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_main, fragment);
+                        ft.commit();
+
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        myDBHelper = new DatabaseHelper(getApplicationContext());
+                        Cursor cursor = myDBHelper.getPlaceByString(newText);
+
+                        Fragment fragment = new SearchResultsFragment(cursor);
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_main, fragment);
+                        ft.commit();
+
+                        return false;
+                    }
+                }
+        );
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
 
         switch (id){
 
@@ -196,6 +285,18 @@ public class MainActivity extends AppCompatActivity
                             Intent intent = new Intent(this, AboutDev.class);
                             startActivity(intent);
                 return true;
+
+            case R.id.action_refresh:
+                            if (isNetworkConnected()) {
+                                SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
+                                localVersion = preferences.getInt("version", 0);
+                                Toast.makeText(getApplicationContext(), "Please Wait!",Toast.LENGTH_SHORT).show();
+                                new FetchVersion().execute("http://nammabengaluru.000webhostapp.com/general/base_version.json");
+                            }
+                            else
+                                Snackbar.make(view, "No Internet Connection! ", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                return  true;
 
 
         }
@@ -244,16 +345,49 @@ public class MainActivity extends AppCompatActivity
                     ft.addToBackStack(null);
                     ft.commit();
                 break;
+
+            case R.id.nav_parks:
+                fragment = new ParkFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+            case R.id.nav_lakes:
+                fragment = new LakesFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+
+            case R.id.nav_kids:
+                fragment = new KidsFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+
             case  R.id.nav_home:
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 break;
 
+            case R.id.feedback:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, raghavisatish24@gmail.com"));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Bengaluru Feedback");
+                startActivity(intent);
+                break;
 
-
-
-
+            case R.id.nav_maps:
+                intent = new Intent(this, MapsActivity.class);
+                startActivity(intent);
+                break;
 
 
         }
@@ -268,10 +402,6 @@ public class MainActivity extends AppCompatActivity
         return cm.getActiveNetworkInfo() != null;
     }
 
-
-
-
-    //asyncTasks
     public class FetchVersion extends AsyncTask<String, String, String> {
         HttpURLConnection connection;
         BufferedReader reader;
@@ -322,6 +452,7 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
+
     public class baseFile extends AsyncTask<String, String, String> {
 
         HttpURLConnection connection;
@@ -391,10 +522,8 @@ public class MainActivity extends AppCompatActivity
                                 Double latitute  = child.getDouble("latitude");
                                 Double longitude  = child.getDouble("longitude");
                                 String category = child.getString("category");
-
                                 myDBHelper.insert_into_places(id, image, name, description,bestSeason, contact, entryFee, additionalInformation, latitute, longitude, category);
                             }
-
 
 
                             SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
@@ -422,7 +551,6 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
-
 
 
 }

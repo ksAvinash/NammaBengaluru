@@ -45,7 +45,7 @@
             card_view:cardBackgroundColor="@android:color/transparent"
             card_view:cardElevation="8dp">
 
-            <com.avinash_ksworks.jci.nammabengaluru.myTextView
+            <com.avinash_ksworks.jci.nammabengaluru.headingText
                     android:padding="10dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/place_textView"
@@ -84,7 +84,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 />
-                            <com.avinash_ksworks.jci.nammabengaluru.myTextView
+                            <com.avinash_ksworks.jci.nammabengaluru.readingText
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#ffffff"
@@ -113,7 +113,7 @@
                                 android:layout_height="70dp"
                                 />
 
-                            <com.avinash_ksworks.jci.nammabengaluru.myTextView
+                            <com.avinash_ksworks.jci.nammabengaluru.readingText
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#ffffff"
@@ -145,7 +145,7 @@
                                 android:layout_height="70dp"
                                 />
 
-                            <com.avinash_ksworks.jci.nammabengaluru.myTextView
+                            <com.avinash_ksworks.jci.nammabengaluru.readingText
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#ffffff"
@@ -177,7 +177,7 @@
                         android:layout_height="70dp"
                         />
 
-                    <com.avinash_ksworks.jci.nammabengaluru.myTextView
+                    <com.avinash_ksworks.jci.nammabengaluru.readingText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#ffffff"
@@ -196,9 +196,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             app:cardBackgroundColor="@color/colorWhite"
             app:cardElevation="4dp">
 
@@ -207,29 +205,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.avinash_ksworks.jci.nammabengaluru.myTextView
+                <com.avinash_ksworks.jci.nammabengaluru.headingText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Description"
                     android:textColor="@color/defTextColor"
-                    app:textWeight="bold"
                     android:textAllCaps="true"
                     android:textSize="18sp" />
 
                 <View style="@style/Divider" />
 
-                <pttextview.widget.PTTextView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <com.avinash_ksworks.jci.nammabengaluru.textFont
                     android:id="@+id/description_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="6dp"
-                    android:textColor="@color/defTextColor"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:layout_margin="8dp"
+                    />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -237,9 +230,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             app:cardBackgroundColor="@color/colorWhite"
             app:cardElevation="4dp">
 
@@ -248,28 +239,25 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.avinash_ksworks.jci.nammabengaluru.myTextView
+                <com.avinash_ksworks.jci.nammabengaluru.headingText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:textAllCaps="true"
                     android:text="Best Season"
                     android:textColor="@color/defTextColor"
-                    app:textWeight="bold"
                     android:textSize="18sp" />
 
                 <View style="@style/Divider" />
 
-                <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <com.avinash_ksworks.jci.nammabengaluru.textFont
                     android:id="@+id/season_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="6dp"
                     android:textSize="16sp"
-                    android:textColor="@color/defTextColor" />
+                    android:layout_margin="8dp"
+                    />
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -278,9 +266,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             app:cardBackgroundColor="@color/colorWhite"
             app:cardElevation="4dp">
 
@@ -289,28 +275,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.avinash_ksworks.jci.nammabengaluru.myTextView
+                <com.avinash_ksworks.jci.nammabengaluru.headingText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Entry Fee"
                     android:textColor="@color/defTextColor"
-                    app:textWeight="bold"
                     android:textAllCaps="true"
                     android:textSize="18sp" />
 
                 <View style="@style/Divider" />
 
-                <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <com.avinash_ksworks.jci.nammabengaluru.textFont
                     android:id="@+id/entryFee_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="6dp"
-                    android:textColor="@color/defTextColor"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:layout_margin="8dp"
+                    />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -318,9 +300,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             app:cardBackgroundColor="@color/colorWhite"
             app:cardElevation="4dp">
 
@@ -329,30 +309,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.avinash_ksworks.jci.nammabengaluru.myTextView
+                <com.avinash_ksworks.jci.nammabengaluru.headingText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:textAllCaps="true"
-                    app:textWeight="bold"
                     android:text="Additional Information"
                     android:textColor="@color/defTextColor"
                     android:textSize="18sp" />
 
                 <View style="@style/Divider" />
 
-                <pttextview.widget.PTTextView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <com.avinash_ksworks.jci.nammabengaluru.textFont
                     android:id="@+id/additionalInformation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="6dp"
                     android:textSize="16sp"
-                    android:textColor="@color/defTextColor" />
-
+                    android:layout_margin="8dp"
+                     />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>

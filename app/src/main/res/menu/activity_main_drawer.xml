@@ -14,10 +14,27 @@
             android:icon="@drawable/temple"
             android:title="Temples" />
 
+
+        <item
+            android:id="@+id/nav_kids"
+            android:icon="@drawable/kids_icon"
+            android:title="Kids" />
+
+
         <item
             android:id="@+id/nav_trekking"
             android:icon="@drawable/trekking"
-            android:title="Trekking Places" />
+            android:title="Trekking" />
+
+        <item
+            android:id="@+id/nav_lakes"
+            android:icon="@drawable/lake_icon"
+            android:title="Lakes" />
+
+        <item
+            android:id="@+id/nav_parks"
+            android:icon="@drawable/parks_icon"
+            android:title="Parks" />
 
         <item
             android:id="@+id/nav_heritage"
@@ -29,20 +46,18 @@
             android:icon="@drawable/my_location"
             android:title="Other Places" />
 
-        <item
-            android:id="@+id/nav_maps"
-            android:icon="@drawable/maps_item"
-            android:title="MAPS" />
 
-        <item
-            android:id="@+id/nav_favourites"
-            android:icon="@drawable/fav"
-            android:title="FAVOURITES" />
+
 
         <item
             android:id="@+id/nav_visited"
             android:icon="@drawable/visit"
             android:title="VISITED" />
+
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/maps_item"
+            android:title="MAPS" />
 
 
     </group>

@@ -9,26 +9,26 @@ import android.widget.TextView;
 
 
 @SuppressLint("AppCompatCustomView")
-public class myTextView extends TextView {
+public class readingText extends TextView {
 
-    public myTextView(Context context, AttributeSet attrs, int defStyle) {
+    public readingText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
-    public myTextView(Context context, AttributeSet attrs) {
+    public readingText(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public myTextView(Context context) {
+    public readingText(Context context) {
         super(context);
         init();
     }
 
     private void init() {
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-                "placenames.otf");
+                "reading_font.ttf");
         setTypeface(tf);
     }
 

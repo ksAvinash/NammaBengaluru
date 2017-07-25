@@ -57,6 +57,7 @@ public class PlaceDisplayFragment extends Fragment {
 
         myDBHelper = new DatabaseHelper(context);
         cursor = myDBHelper.getPlaceById(id);
+
         while (cursor.moveToNext()){
             placename = cursor.getString(2);
             place_textView.setText(placename);
@@ -68,7 +69,7 @@ public class PlaceDisplayFragment extends Fragment {
             latitude = cursor.getDouble(8);
             longitude = cursor.getDouble(9);
 
-            //image downloading
+
             Uri uri = Uri.parse(cursor.getString(1));
             draweeView.getHierarchy().setProgressBarImage(new CircleProgressBarDrawable(2));
             draweeView.setImageURI(uri);
@@ -84,17 +85,6 @@ public class PlaceDisplayFragment extends Fragment {
                         new Intent(
                                 android.content.Intent.ACTION_VIEW,
                                 Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + place_textView.getText() + ")@" + latitude + "," + longitude)));
-
-            }
-        });
-
-        favourite_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                favourite_icon.playAnimation();
-                myDBHelper.insertIntoFavourites(id);
-                Snackbar.make(view, placename+" Added to Favourites list", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
 
             }
         });

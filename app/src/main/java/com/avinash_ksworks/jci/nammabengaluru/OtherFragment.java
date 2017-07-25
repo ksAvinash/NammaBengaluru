@@ -7,9 +7,11 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class OtherFragment extends Fragment {
     TextView t;
     ListView list;
     SimpleDraweeView draweeView;
+    Cursor cursor;
     private List<generic_adapter> OTHER_ADAPTER_LIST = new ArrayList<>();
 
     @Override
@@ -60,7 +63,7 @@ public class OtherFragment extends Fragment {
 
 
         myDBHelper = new DatabaseHelper(context);
-        Cursor cursor = myDBHelper.getAllOther();
+        cursor = myDBHelper.getAllOther();
 
         while (cursor.moveToNext()){
 
@@ -92,6 +95,21 @@ public class OtherFragment extends Fragment {
 
         ArrayAdapter<generic_adapter> adapter = new myOtherListAdapterClass();
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                cursor.moveToPosition(position);
+                int img_id = Integer.parseInt(cursor.getString(0));
+
+                Fragment fragment = new PlaceDisplayFragment(img_id);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
+            }
+        });
     }
 
 

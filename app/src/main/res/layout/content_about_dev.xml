@@ -12,7 +12,7 @@
 
 
 
-    <com.avinash_ksworks.jci.nammabengaluru.myTextView
+    <com.avinash_ksworks.jci.nammabengaluru.headingText
         android:id="@+id/pq1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,21 +70,20 @@
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <pttextview.widget.PTTextView
+
+                    <com.avinash_ksworks.jci.nammabengaluru.textFont
                         android:paddingTop="20dp"
                         android:paddingLeft="30dp"
                         android:textSize="20sp"
-                        app:textWeight="bold"
                         android:textColor="#d5e1b3"
                         android:text="Avinash_ks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
-                    <pttextview.widget.PTTextView
+                    <com.avinash_ksworks.jci.nammabengaluru.textFont
                         android:paddingLeft="15dp"
                         android:paddingTop="15dp"
                         android:textSize="12sp"
-                        app:textWeight="bold"
                         android:textColor="#ffffff"
                         android:text="justmailtoavi@gmail.com"
                         android:layout_width="wrap_content"
@@ -109,21 +108,19 @@
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-                        <pttextview.widget.PTTextView
+                        <com.avinash_ksworks.jci.nammabengaluru.textFont
                             android:paddingTop="20dp"
                             android:paddingLeft="30dp"
                             android:textSize="20sp"
-                            app:textWeight="bold"
                             android:textColor="#d5e1b3"
                             android:text="Raghavi Satish"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <pttextview.widget.PTTextView
+                        <com.avinash_ksworks.jci.nammabengaluru.textFont
                             android:paddingLeft="15dp"
                             android:paddingTop="15dp"
                             android:textSize="12sp"
-                            app:textWeight="bold"
                             android:textColor="#ffffff"
                             android:text="raghavisatish24@gmail.com"
                             android:layout_width="wrap_content"

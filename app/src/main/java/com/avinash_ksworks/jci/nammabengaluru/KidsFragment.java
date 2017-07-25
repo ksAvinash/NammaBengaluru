@@ -3,7 +3,6 @@ package com.avinash_ksworks.jci.nammabengaluru;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avinash_ksworks.jci.nammabengaluru.adapter.DatabaseHelper;
 import com.avinash_ksworks.jci.nammabengaluru.adapter.generic_adapter;
@@ -28,10 +28,10 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TrekkingFragment extends Fragment {
+public class KidsFragment extends Fragment {
 
 
-    public TrekkingFragment() {
+    public KidsFragment() {
         // Required empty public constructor
     }
     View view;
@@ -41,29 +41,31 @@ public class TrekkingFragment extends Fragment {
     ListView list;
     SimpleDraweeView draweeView;
     Cursor cursor;
-    private List<generic_adapter> TREKKING_ADAPTER_LIST = new ArrayList<>();
+    private List<generic_adapter> KIDS_ADAPTER_LIST = new ArrayList<>();
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view =  inflater.inflate(R.layout.fragment_trekking, container, false);
+        // Inflate the layout for this fragment
+        view =  inflater.inflate(R.layout.fragment_kids, container, false);
         context = getActivity().getApplicationContext();
-
 
         Fresco.initialize(getActivity());
 
 
 
-        list = (ListView) view.findViewById(R.id.trekkingList);
+        list = (ListView) view.findViewById(R.id.kidsList);
 
-        TREKKING_ADAPTER_LIST.clear();
+        KIDS_ADAPTER_LIST.clear();
 
 
         myDBHelper = new DatabaseHelper(context);
-        cursor = myDBHelper.getAllTrekking();
+        cursor = myDBHelper.getAllKids();
 
         while (cursor.moveToNext()){
 
-            TREKKING_ADAPTER_LIST.add(new generic_adapter(
+         KIDS_ADAPTER_LIST.add(new generic_adapter(
 
                     Integer.parseInt(cursor.getString(0)),
                     cursor.getString(1),
@@ -82,23 +84,23 @@ public class TrekkingFragment extends Fragment {
 
         displayList();
 
-        return view;
-    }
 
+
+
+            return view;
+    }
 
 
     public void displayList(){
 
-        ArrayAdapter<generic_adapter> adapter = new myTrekkingListAdapterClass();
+        ArrayAdapter<generic_adapter> adapter = new KidsFragment.myKidsListAdapterClass();
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 cursor.moveToPosition(position);
-                int img_id = Integer.parseInt(cursor.getString(0));
 
-                Fragment fragment = new PlaceDisplayFragment(img_id);
+                Fragment fragment = new PlaceDisplayFragment(cursor.getInt(0));
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
                 ft.addToBackStack(null);
@@ -108,13 +110,10 @@ public class TrekkingFragment extends Fragment {
         });
     }
 
+    private class myKidsListAdapterClass extends ArrayAdapter<generic_adapter> {
 
-
-
-    public class myTrekkingListAdapterClass extends ArrayAdapter<generic_adapter> {
-
-        myTrekkingListAdapterClass() {
-            super(context, R.layout.list_item, TREKKING_ADAPTER_LIST);
+        myKidsListAdapterClass() {
+            super(context, R.layout.list_item, KIDS_ADAPTER_LIST);
         }
 
 
@@ -126,7 +125,7 @@ public class TrekkingFragment extends Fragment {
                 itemView = inflater.inflate(R.layout.list_item, parent, false);
 
             }
-            generic_adapter current = TREKKING_ADAPTER_LIST.get(position);
+            generic_adapter current = KIDS_ADAPTER_LIST.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage());
@@ -147,3 +146,4 @@ public class TrekkingFragment extends Fragment {
 
 
 }
+

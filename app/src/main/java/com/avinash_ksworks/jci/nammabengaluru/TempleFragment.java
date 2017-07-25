@@ -32,9 +32,7 @@ public class TempleFragment extends Fragment {
 
 
 
-    public TempleFragment() {
-        // Required empty public constructor
-    }
+    public TempleFragment() {}
 
 
     View view;
@@ -54,9 +52,6 @@ public class TempleFragment extends Fragment {
 
 
         Fresco.initialize(getActivity());
-
-
-
 
         list = (ListView) view.findViewById(R.id.templeList);
 

@@ -3,13 +3,14 @@ package com.avinash_ksworks.jci.nammabengaluru;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,10 +27,10 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavouritesFragment extends Fragment {
+public class ParkFragment extends Fragment {
 
 
-    public FavouritesFragment() {
+    public ParkFragment() {
         // Required empty public constructor
     }
 
@@ -39,31 +40,31 @@ public class FavouritesFragment extends Fragment {
     TextView t;
     ListView list;
     SimpleDraweeView draweeView;
-    private List<generic_adapter> FAVOURITES_ADAPTER_LIST = new ArrayList<>();
+    Cursor cursor;
+    private List<generic_adapter> PARK_ADAPTER_LIST = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view =  inflater.inflate(R.layout.fragment_favourites, container, false);
-        context = getActivity().getApplicationContext();
 
+        view = inflater.inflate(R.layout.fragment_park, container, false);
+        context = getActivity().getApplicationContext();
 
         Fresco.initialize(getActivity());
 
 
+        list = (ListView) view.findViewById(R.id.parkList);
 
-
-        list = (ListView) view.findViewById(R.id.favouriteList);
-
-        FAVOURITES_ADAPTER_LIST.clear();
+        PARK_ADAPTER_LIST.clear();
 
 
         myDBHelper = new DatabaseHelper(context);
-        Cursor cursor = myDBHelper.getAllFavourites();
+        cursor = myDBHelper.getAllParks();
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
-            FAVOURITES_ADAPTER_LIST.add(new generic_adapter(
+            PARK_ADAPTER_LIST.add(new generic_adapter(
 
                     Integer.parseInt(cursor.getString(0)),
                     cursor.getString(1),
@@ -82,24 +83,36 @@ public class FavouritesFragment extends Fragment {
 
         displayList();
 
-        return view;
-    }
 
+            return view;
+        }
 
 
     public void displayList(){
 
-        ArrayAdapter<generic_adapter> adapter = new myFavouritesistAdapterClass();
+        ArrayAdapter<generic_adapter> adapter = new ParkFragment.myParkListAdapterClass();
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                cursor.moveToPosition(position);
+                int img_id = Integer.parseInt(cursor.getString(0));
+
+                Fragment fragment = new PlaceDisplayFragment(img_id);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
+            }
+        });
     }
 
+    public class myParkListAdapterClass extends ArrayAdapter<generic_adapter> {
 
-
-
-    public class myFavouritesistAdapterClass extends ArrayAdapter<generic_adapter> {
-
-        myFavouritesistAdapterClass() {
-            super(context, R.layout.list_item, FAVOURITES_ADAPTER_LIST);
+        myParkListAdapterClass() {
+            super(context, R.layout.list_item, PARK_ADAPTER_LIST);
         }
 
 
@@ -111,7 +124,7 @@ public class FavouritesFragment extends Fragment {
                 itemView = inflater.inflate(R.layout.list_item, parent, false);
 
             }
-            generic_adapter current = FAVOURITES_ADAPTER_LIST.get(position);
+            generic_adapter current = PARK_ADAPTER_LIST.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage());
@@ -130,6 +143,11 @@ public class FavouritesFragment extends Fragment {
         }
     }
 
+
 }
+
+
+
+
 
 
