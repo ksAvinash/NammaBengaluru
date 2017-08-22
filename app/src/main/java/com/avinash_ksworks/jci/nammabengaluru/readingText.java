@@ -28,7 +28,7 @@ public class readingText extends TextView {
 
     private void init() {
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-                "reading_font.ttf");
+                "reading_font.otf");
         setTypeface(tf);
     }
 

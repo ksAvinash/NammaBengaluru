@@ -30,7 +30,7 @@ public class textFont extends TextView {
 
     private void init() {
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-                "Verdana.ttf");
+                "reading_font.otf");
         setTypeface(tf);
     }
 

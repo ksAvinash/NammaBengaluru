@@ -15,7 +15,6 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "jarvis";
 
     private static final String TABLE_PLACES = "jarvis_places";
-    private static final String TABLE_VISITED = "jarvis_visited";
     private static final String TABLE_TREKKING = "jarvis_trekking";
 
     private static final String place_image = "image";
@@ -49,8 +48,6 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         String create_table_trekking="create table "+TABLE_TREKKING+" ("+place_id+" integer primary key, "+place_image+" text, "+place_name+" text, "+place_description+" text, "+place_bestSeason+" text, "+place_contact+" text, "+place_entryFee+" text, "+ place_additionalInformation +" text, "+place_latitude+" double, "+place_longitude+" double, "+place_category+" text, "+place_trekLength+" double, "+place_DistanceFromBangalore+" text, "+place_DifficultyLevel+" text); ";
         db.execSQL(create_table_trekking);
 
-        String create_table_vis="create table "+TABLE_VISITED+"("+place_id+" integer primary key);";
-        db.execSQL(create_table_vis);
     }
 
     @Override
@@ -58,8 +55,6 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         db.execSQL("drop table if exists "+TABLE_PLACES);
 
         db.execSQL("drop table if exists "+TABLE_TREKKING);
-
-        db.execSQL("drop table if exists "+TABLE_VISITED);
 
         onCreate(db);
     }
@@ -110,19 +105,11 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         return  true;
     }
 
-    public boolean insertIntoVisited(int id){
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues contentValues=new ContentValues();
-        contentValues.put(place_id,id);
-        database.insert(TABLE_VISITED,null,contentValues);
-        return true;
-    }
 
     public void deleteTables(){
         SQLiteDatabase db = this.getWritableDatabase();
         onUpgrade(db,0,1);
     }
-
 
 
 
@@ -156,13 +143,6 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         String str = "select * from "+TABLE_PLACES+" where "+place_category+" = 'kids';";
         SQLiteDatabase db = this.getWritableDatabase();
         return  db.rawQuery(str,null);
-    }
-
-    public Cursor getAllHeritage(){
-        String str = "select * from "+TABLE_PLACES+" where "+place_category+" = 'heritage';";
-        SQLiteDatabase db = this.getWritableDatabase();
-        return  db.rawQuery(str,null);
-
     }
 
     public Cursor getAllOther(){

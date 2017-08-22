@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,9 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.sa90.materialarcmenu.ArcMenu;
 
 import org.json.JSONArray;
@@ -61,7 +65,7 @@ public class MainActivity extends AppCompatActivity
     View view;
     DatabaseHelper myDBHelper;
     ArcMenu arcMenu;
-    FloatingActionButton fab_temple, fab_trekking, fab_heritage;
+    FloatingActionButton fab_temple, fab_trekking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if(isNetworkConnected()){
+
             SharedPreferences preferences = getSharedPreferences("only_once", Context.MODE_PRIVATE);
             if(preferences.getInt("first", 0) == 0) {
                 SharedPreferences.Editor editor = preferences.edit();
@@ -95,7 +100,31 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Please Wait!",Toast.LENGTH_SHORT).show();
                 new FetchVersion().execute("http://nammabengaluru.000webhostapp.com/general/base_version.json");
             }
+
+            Toast.makeText(this, "An ad appears in 5 seconds",Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+//                AdRequest adRequest = new AdRequest.Builder().build();
+//                final InterstitialAd interstitial = new InterstitialAd(getApplicationContext());
+//                interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//                interstitial.loadAd(adRequest);
+//                interstitial.setAdListener(new AdListener() {
+//                    public void onAdLoaded() {
+//
+//                        if (interstitial.isLoaded()) {
+//                            interstitial.show();
+//                        }
+//                    }
+//                });
+                }
+            }, 3000);
+
         }
+
+
+
 
 
     }
@@ -106,7 +135,6 @@ public class MainActivity extends AppCompatActivity
         arcMenu = (ArcMenu) findViewById(R.id.arcMenu);
 
         fab_temple = (FloatingActionButton)findViewById(R.id.fab_temple);
-        fab_heritage = (FloatingActionButton)findViewById(R.id.fab_heritage);
         fab_trekking = (FloatingActionButton)findViewById(R.id.fab_trekking);
     }
 
@@ -116,8 +144,9 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment;
         FragmentTransaction ft;
         switch (view.getId()){
-            case R.id.fab_heritage:
-                fragment = new HeritageFragment();
+
+            case R.id.fab_lakes:
+                fragment = new LakesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
                 ft.addToBackStack(null);
@@ -323,13 +352,6 @@ public class MainActivity extends AppCompatActivity
                     ft.commit();
                 break;
 
-            case R.id.nav_heritage:
-                    fragment = new HeritageFragment();
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content_main, fragment);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                break;
 
             case R.id.nav_otherPlaces:
                     fragment = new OtherFragment();
@@ -390,6 +412,10 @@ public class MainActivity extends AppCompatActivity
                 break;
 
 
+            case R.id.new_place:
+                Snackbar.make(view,"Just mail the place name, We'll add it asap!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

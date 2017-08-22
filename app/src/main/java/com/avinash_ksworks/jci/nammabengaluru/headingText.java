@@ -26,7 +26,7 @@ public class headingText extends TextView {
 
     private void init() {
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-                "placenames.otf");
+                "edo.ttf");
         setTypeface(tf);
     }
 

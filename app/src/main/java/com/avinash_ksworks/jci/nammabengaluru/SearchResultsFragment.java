@@ -78,6 +78,23 @@ public class SearchResultsFragment extends Fragment {
     private void displayList() {
         ArrayAdapter<generic_adapter> adapter = new mySearchListAdapterClass();
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                PlaceCursor.moveToPosition(position);
+                int img_id = Integer.parseInt(PlaceCursor.getString(0));
+
+                Fragment fragment = new PlaceDisplayFragment(img_id);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
+            }
+        });
+
+
     }
 
 

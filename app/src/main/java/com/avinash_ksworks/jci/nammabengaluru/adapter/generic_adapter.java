@@ -1,8 +1,6 @@
 package com.avinash_ksworks.jci.nammabengaluru.adapter;
 
-/**
- * Created by avinashk on 28/05/17.
- */
+
 
 public class generic_adapter {
 

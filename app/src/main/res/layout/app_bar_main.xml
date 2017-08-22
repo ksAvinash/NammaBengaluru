@@ -64,9 +64,9 @@
             android:layout_height="wrap_content" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_heritage"
+            android:id="@+id/fab_lakes"
             android:layout_width="wrap_content"
-            android:src="@drawable/heritage"
+            android:src="@drawable/lake_icon"
             android:onClick="fab_button_click"
             android:layout_height="wrap_content" />
 
