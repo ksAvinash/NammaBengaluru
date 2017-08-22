@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void run() {
 
+
 //                AdRequest adRequest = new AdRequest.Builder().build();
 //                final InterstitialAd interstitial = new InterstitialAd(getApplicationContext());
 //                interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));

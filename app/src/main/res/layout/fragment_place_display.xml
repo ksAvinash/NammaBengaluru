@@ -5,47 +5,101 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/place_background_wallpaper"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="#212121"
-            android:orientation="vertical" />
-
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/layout_image"
-            android:layout_width="match_parent"
-            android:layout_height="270dp"
-            />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="#212121"
-            android:orientation="vertical" />
-
 
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/myCardView"
+            android:id="@+id/distance_card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            card_view:cardBackgroundColor="@android:color/transparent"
-            card_view:cardElevation="8dp">
+            android:layout_height="wrap_content"
+            android:layout_marginRight="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardElevation="6dp">
 
-            <com.avinash_ksworks.jci.nammabengaluru.headingText
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginTop="12dp"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/travel_icon"
+                    android:id="@+id/ti"
+                    />
+
+                <com.avinash_ksworks.jci.nammabengaluru.headingText
+                    android:layout_below="@+id/ti"
+                    android:id="@+id/result_distance_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="DISTANCE   120km\nTime to travel 3hr, 15mins"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/resultMapButton"
+                    android:layout_width="160dp"
+                    android:layout_below="@+id/result_distance_textview"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button"
+                    android:text="Start navigation"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/colorWhite" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <LinearLayout
+            android:id="@+id/place_view"
+            android:visibility="visible"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="#212121"
+                android:orientation="vertical" />
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/layout_image"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="#212121"
+                android:orientation="vertical" />
+
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/myCardView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="8dp">
+
+                <com.avinash_ksworks.jci.nammabengaluru.headingText
                     android:padding="4dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/place_textView"
@@ -55,255 +109,261 @@
                     android:layout_gravity="center_horizontal"
                     android:textColor="#ffffff"
                     />
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
 
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            >
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="32dp"
-                android:layout_toLeftOf="@+id/contact_View"
-                >
-                <ImageView
-                    android:id="@+id/imagesGallery"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/gallery_icon"
-                    />
-                <com.avinash_ksworks.jci.nammabengaluru.readingText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:text="GALLERY"
-                    android:layout_below="@+id/imagesGallery"
-                    android:layout_centerHorizontal="true"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/contact_View"
-                >
-                <ImageView
-                    android:id="@+id/contactNumber"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/contact_number"
-                    />
-
-                <com.avinash_ksworks.jci.nammabengaluru.readingText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:text="CONTACT"
-                    android:layout_below="@+id/contactNumber"
-                    android:layout_centerHorizontal="true"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/contact_View"
-                android:layout_marginLeft="32dp"
+                android:padding="2dp"
                 >
 
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:id="@+id/GoogleMapsAPI"
-                    android:src="@drawable/google_maps_api"
-                    />
-
-                <com.avinash_ksworks.jci.nammabengaluru.readingText
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:text="DISTANCE"
-                    android:layout_below="@+id/GoogleMapsAPI"
+                    android:layout_marginRight="32dp"
+                    android:layout_toLeftOf="@+id/contact_View"
+                    >
+                    <ImageView
+                        android:id="@+id/imagesGallery"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/gallery_icon"
+                        />
+                    <com.avinash_ksworks.jci.nammabengaluru.readingText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:text="GALLERY"
+                        android:layout_below="@+id/imagesGallery"
+                        android:layout_centerHorizontal="true"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    />
+                    android:id="@+id/contact_View"
+                    >
+                    <ImageView
+                        android:id="@+id/contactNumber"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/contact_number"
+                        />
+
+                    <com.avinash_ksworks.jci.nammabengaluru.readingText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:text="CONTACT"
+                        android:layout_below="@+id/contactNumber"
+                        android:layout_centerHorizontal="true"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/contact_View"
+                    android:layout_marginLeft="32dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:id="@+id/GoogleMapsAPI"
+                        android:src="@drawable/google_maps_api"
+                        />
+
+                    <com.avinash_ksworks.jci.nammabengaluru.readingText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:text="DISTANCE"
+                        android:layout_below="@+id/GoogleMapsAPI"
+                        android:layout_centerHorizontal="true"
+                        />
+                </RelativeLayout>
+
             </RelativeLayout>
 
-        </RelativeLayout>
 
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            card_view:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="4dp">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="2dp"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="4dp">
 
-                <com.avinash_ksworks.jci.nammabengaluru.headingText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Description"
-                    android:textColor="@color/defTextColor"
-                    android:textAllCaps="true"
-                    android:textSize="18sp" />
+                    android:orientation="vertical">
 
-                <View style="@style/Divider" />
+                    <com.avinash_ksworks.jci.nammabengaluru.headingText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Description"
+                        android:textColor="@color/defTextColor"
+                        android:textAllCaps="true"
+                        android:textSize="18sp" />
 
-                <com.avinash_ksworks.jci.nammabengaluru.textFont
-                    android:id="@+id/description_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    android:textColor="#ffffff"
-                    android:layout_margin="2dp"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <View style="@style/Divider" />
+
+                    <com.avinash_ksworks.jci.nammabengaluru.textFont
+                        android:id="@+id/description_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textColor="#ffffff"
+                        android:layout_margin="2dp"
+                        />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            card_view:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="4dp">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="4dp">
 
-                <com.avinash_ksworks.jci.nammabengaluru.headingText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textAllCaps="true"
-                    android:text="Best Season"
-                    android:textColor="@color/defTextColor"
-                    android:textSize="18sp" />
+                    android:orientation="vertical">
 
-                <View style="@style/Divider" />
+                    <com.avinash_ksworks.jci.nammabengaluru.headingText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:textAllCaps="true"
+                        android:text="Best Season"
+                        android:textColor="@color/defTextColor"
+                        android:textSize="18sp" />
 
-                <com.avinash_ksworks.jci.nammabengaluru.textFont
-                    android:id="@+id/season_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    android:textColor="#ffffff"
-                    android:layout_margin="2dp"
-                    />
+                    <View style="@style/Divider" />
 
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <com.avinash_ksworks.jci.nammabengaluru.textFont
+                        android:id="@+id/season_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textColor="#ffffff"
+                        android:layout_margin="2dp"
+                        />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
 
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            card_view:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="4dp">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="4dp">
 
-                <com.avinash_ksworks.jci.nammabengaluru.headingText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Entry Fee"
-                    android:textColor="@color/defTextColor"
-                    android:textAllCaps="true"
-                    android:textSize="18sp" />
+                    android:orientation="vertical">
 
-                <View style="@style/Divider" />
+                    <com.avinash_ksworks.jci.nammabengaluru.headingText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Entry Fee"
+                        android:textColor="@color/defTextColor"
+                        android:textAllCaps="true"
+                        android:textSize="18sp" />
 
-                <com.avinash_ksworks.jci.nammabengaluru.textFont
-                    android:id="@+id/entryFee_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    android:textColor="#ffffff"
-                    android:layout_margin="2dp"
-                    />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <View style="@style/Divider" />
+
+                    <com.avinash_ksworks.jci.nammabengaluru.textFont
+                        android:id="@+id/entryFee_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textColor="#ffffff"
+                        android:layout_margin="2dp"
+                        />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            card_view:cardBackgroundColor="@android:color/transparent"
-            app:cardElevation="4dp">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="4dp">
 
-                <com.avinash_ksworks.jci.nammabengaluru.headingText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textAllCaps="true"
-                    android:text="Additional Information"
-                    android:textColor="@color/defTextColor"
-                    android:textSize="18sp" />
+                    android:orientation="vertical">
 
-                <View style="@style/Divider" />
+                    <com.avinash_ksworks.jci.nammabengaluru.headingText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:textAllCaps="true"
+                        android:text="Additional Information"
+                        android:textColor="@color/defTextColor"
+                        android:textSize="18sp" />
 
-                <com.avinash_ksworks.jci.nammabengaluru.textFont
-                    android:id="@+id/additionalInformation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    android:textColor="#ffffff"
-                    android:layout_margin="2dp"
-                     />
+                    <View style="@style/Divider" />
 
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <com.avinash_ksworks.jci.nammabengaluru.textFont
+                        android:id="@+id/additionalInformation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textColor="#ffffff"
+                        android:layout_margin="2dp"
+                        />
 
-
-        <Button
-            android:id="@+id/gmapButton"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/rounded_button"
-            android:text="View on maps"
-            android:textColor="@color/colorWhite" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="40dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/gmapButton"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_button"
+                android:text="View on maps"
+                android:textColor="@color/colorWhite" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
 
 </ScrollView>

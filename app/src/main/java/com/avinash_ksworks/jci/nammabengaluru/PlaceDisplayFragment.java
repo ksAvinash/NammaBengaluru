@@ -19,6 +19,7 @@ import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,6 @@ public class PlaceDisplayFragment extends Fragment {
 
     View view;
     Cursor cursor;
-    Location myLocation;
     int id;
     private Double latitude, longitude;
     DatabaseHelper myDBHelper;
@@ -76,8 +76,10 @@ public class PlaceDisplayFragment extends Fragment {
     TextView description_textView, season_textView, additional_information, entryFee, place_textView;
     SimpleDraweeView draweeView;
     ImageView gallery_icon, contact_icon, google_distance_icon;
-    LinearLayout place_background_wallpaper;
+    LinearLayout place_view;
     ProgressDialog pd;
+    Location myLocation;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
@@ -126,26 +128,26 @@ public class PlaceDisplayFragment extends Fragment {
                 if(isNetworkConnected()){
                     Toast.makeText(context, "Contact details after the ad",Toast.LENGTH_SHORT).show();
                     //show the ad
-                    AdRequest adRequest = new AdRequest.Builder().build();
-                    final InterstitialAd interstitial = new InterstitialAd(context);
-                    interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-                    interstitial.loadAd(adRequest);
-                    interstitial.setAdListener(new AdListener() {
-                        public void onAdLoaded() {
+//                    AdRequest adRequest = new AdRequest.Builder().build();
+//                    final InterstitialAd interstitial = new InterstitialAd(context);
+//                    interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//                    interstitial.loadAd(adRequest);
+//                    interstitial.setAdListener(new AdListener() {
+//                        public void onAdLoaded() {
+//
+//                            if (interstitial.isLoaded()) {
+//                                interstitial.show();
+//                            }
+//                        }
+//                    });
 
-                            if (interstitial.isLoaded()) {
-                                interstitial.show();
-                            }
-                        }
-                    });
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
                             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", contactNumber, null));
                             startActivity(intent);
-                        }
-                    }, 3000);
+//                        }
+//                    }, 3000);
 
 
                 }else {
@@ -209,19 +211,14 @@ public class PlaceDisplayFragment extends Fragment {
         gallery_icon = (ImageView) view.findViewById(R.id.imagesGallery);
         contact_icon = (ImageView) view.findViewById(R.id.contactNumber);
         google_distance_icon = (ImageView) view.findViewById(R.id.GoogleMapsAPI);
-        place_background_wallpaper = (LinearLayout) view.findViewById(R.id.place_background_wallpaper);
+        place_view = (LinearLayout) view.findViewById(R.id.place_view);
         pd = new ProgressDialog(getActivity());
     }
-
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
-
-
-
 
     private class GoogleMapsDistanceAPI extends AsyncTask<String, String, String> {
         HttpURLConnection connection;
@@ -277,11 +274,10 @@ public class PlaceDisplayFragment extends Fragment {
 
                     JSONObject distance = legs_object.getJSONObject("distance");
                     JSONObject duration = legs_object.getJSONObject("duration");
-                    str = distance.getString("text") + "," + duration.getString("text");
+                    str = "DISTANCE  "+distance.getString("text") + "\nTIME TO TRAVEL  " + duration.getString("text");
+                    changeUI(str);
 
-                    Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
                 }else {
-                    str = "";
                     Toast.makeText(context, "FAIL", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
@@ -292,7 +288,25 @@ public class PlaceDisplayFragment extends Fragment {
 
     }
 
+    private void changeUI(String str) {
+        CardView distance_card = (CardView)view.findViewById(R.id.distance_card);
+        TextView result_distance_textview = (TextView) view.findViewById(R.id.result_distance_textview);
+        Button resultMapButton = (Button) view.findViewById(R.id.resultMapButton);
 
+        place_view.setVisibility(View.GONE);
+        distance_card.setVisibility(View.VISIBLE);
+
+        result_distance_textview.setText(str);
+
+        resultMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?saddr="+myLocation.getLatitude()+","+myLocation.getLongitude()+"&daddr="+latitude+","+longitude+""));
+                startActivity(intent);
+            }
+        });
+    }
 
     private void getLocation() {
         pd.setMessage("Determining your location..");
@@ -302,7 +316,7 @@ public class PlaceDisplayFragment extends Fragment {
         MyLocation.LocationResult locationResult = new MyLocation.LocationResult(){
             @Override
             public void gotLocation(Location source){
-
+                myLocation = source;
                 if(source!=null){
 
                     Location destination = new Location("nk");
@@ -323,11 +337,6 @@ public class PlaceDisplayFragment extends Fragment {
         MyLocation myLocation = new MyLocation();
         myLocation.getLocation(context, locationResult);
     }
-
-
-
-
-
 
 
 }
