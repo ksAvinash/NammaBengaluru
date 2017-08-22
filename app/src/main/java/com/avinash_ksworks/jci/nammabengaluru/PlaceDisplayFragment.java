@@ -194,7 +194,6 @@ public class PlaceDisplayFragment extends Fragment {
         });
 
 
-
         return view;
     }
 

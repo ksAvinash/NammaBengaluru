@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
         if(isNetworkConnected()){
 
             SharedPreferences preferences = getSharedPreferences("only_once", Context.MODE_PRIVATE);
